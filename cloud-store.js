@@ -3,7 +3,7 @@ import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signI
 import { getFirestore, collection, doc, getDocs, setDoc, deleteDoc, onSnapshot, initializeFirestore, persistentLocalCache, persistentMultipleTabManager, waitForPendingWrites } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyCrE1y1F0GeBXkGjnRpFVg3Qwbl29_4z-U',
+  apiKey: 'AIzaSyCrE1y1FOGeBXkGjnRpFVg3Qwbl29_4z-U',
   authDomain: 'travel-bookshelf-98125.firebaseapp.com',
   projectId: 'travel-bookshelf-98125',
   storageBucket: 'travel-bookshelf-98125.firebasestorage.app',
