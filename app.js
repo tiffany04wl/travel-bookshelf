@@ -651,22 +651,20 @@
 
   function renderTripCard(trip,index=0) {
     const tone = index % 6;
+    const dateLabel = `${fmtDate(trip.startDate)} - ${fmtDate(trip.endDate)}`;
     return `
-      <article class="trip-card tone-${tone}" style="--book-index:${index}" data-action="open-trip" data-id="${trip.id}">
-        <span class="book-tape" aria-hidden="true"></span>
-        <span class="book-ribbon" aria-hidden="true"></span>
-        <span class="book-spine-title">${esc(trip.title)}</span>
-        <div class="book-photo">
-          ${trip.cover ? `<img class="cover" src="${esc(trip.cover)}" alt="">` : `<div class="cover-placeholder"><span>${esc(trip.title)}</span><small>${(trip.startDate||"").slice(0,4)}</small></div>`}
+      <article class="trip-card trip-card-simple trip-card-journal tone-${tone}" data-action="open-trip" data-id="${trip.id}" tabindex="0" aria-label="開啟${esc(trip.title)}">
+        <span class="journal-ribbon" aria-hidden="true"></span>
+        <div class="trip-card-top"><span class="trip-card-year">${esc((trip.startDate||"未定").slice(0,4))}</span><span class="trip-card-mark" aria-hidden="true">✦</span></div>
+        <div class="journal-heading">
+          <h3 class="trip-card-title">${esc(trip.title)}</h3>
+          <span class="journal-plane" aria-hidden="true">${icon("plane",24)}</span>
         </div>
-        <div class="trip-card-content">
-          <h3>${esc(trip.title)}</h3>
-          ${trip.tagline ? `<div class="trip-tagline">${esc(trip.tagline)}</div>` : ""}
-          <div class="trip-meta">
-            <span>${fmtDate(trip.startDate)}－${fmtDate(trip.endDate)}</span>
-            <span>${trip.members.length} 位成員</span>
-            <span>${formatMoney(Math.round(tripTotalTWD(trip)),"TWD")}</span>
-          </div>
+        ${trip.tagline ? `<div class="trip-card-subtitle">${esc(trip.tagline)}</div>` : ""}
+        <div class="trip-card-details">
+          <div class="trip-card-date journal-detail">${icon("calendar-days",18)}<span>${esc(dateLabel)}</span></div>
+          <div class="trip-card-members journal-detail">${icon("users-round",18)}<span>${trip.members.length} 位成員</span></div>
+          <div class="trip-card-total journal-detail">${icon("wallet",19)}<span>${formatMoney(Math.round(tripTotalTWD(trip)),"TWD")}</span></div>
         </div>
       </article>`;
   }
@@ -1089,7 +1087,6 @@
           <input type="number" step="0.01" min="0" name="initialAmount" value="${trip?.initialAmount??0}" placeholder="例如：50000">
           <div class="muted small" style="margin-top:6px">只用於計算此趟旅程餘額，不納入支出統計或分帳。</div>
         </div>
-        <div class="field"><label>封面圖片網址（可留空）</label><input name="cover" value="${esc(trip?.cover||"")}" placeholder="https://..."></div>
         <div class="field">
           <label>旅伴</label>
           <div class="member-input-row"><input id="memberInput" placeholder="輸入姓名"><button type="button" class="secondary-btn" data-action="add-member">加入</button></div>
@@ -1242,10 +1239,10 @@
     if(ui.editingTripId){
       const t=state.trips.find(x=>x.id===ui.editingTripId);
       const oldByName=Object.fromEntries(t.members.map(m=>[m.name,m]));
-      t.title=fd.get("title").trim();t.tagline=fd.get("tagline").trim();t.startDate=fd.get("startDate");t.endDate=fd.get("endDate");t.currency=fd.get("currency");t.rate=Number(fd.get("rate"));t.initialAmount=Number(fd.get("initialAmount")||0);t.cover=fd.get("cover").trim();
+      t.title=fd.get("title").trim();t.tagline=fd.get("tagline").trim();t.startDate=fd.get("startDate");t.endDate=fd.get("endDate");t.currency=fd.get("currency");t.rate=Number(fd.get("rate"));t.initialAmount=Number(fd.get("initialAmount")||0);t.cover="";
       t.members=memberNames.map(n=>oldByName[n]||{id:crypto.randomUUID(),name:n});
     }else{
-      state.trips.push({id:crypto.randomUUID(),title:fd.get("title").trim(),tagline:fd.get("tagline").trim(),startDate:fd.get("startDate"),endDate:fd.get("endDate"),currency:fd.get("currency"),rate:Number(fd.get("rate")),initialAmount:Number(fd.get("initialAmount")||0),cover:fd.get("cover").trim(),members:memberNames.map(n=>({id:crypto.randomUUID(),name:n})),customCategories:[],expenses:[],createdAt:Date.now()});
+      state.trips.push({id:crypto.randomUUID(),title:fd.get("title").trim(),tagline:fd.get("tagline").trim(),startDate:fd.get("startDate"),endDate:fd.get("endDate"),currency:fd.get("currency"),rate:Number(fd.get("rate")),initialAmount:Number(fd.get("initialAmount")||0),cover:"",members:memberNames.map(n=>({id:crypto.randomUUID(),name:n})),customCategories:[],expenses:[],createdAt:Date.now()});
     }
     saveState();ui.modal=null;ui.editingTripId=null;render();toast("旅程已儲存");
   }
