@@ -1,4 +1,4 @@
-const CACHE_NAME = "travel-bookshelf-v1.7";
+const CACHE_NAME = "travel-bookshelf-v1.7.2";
 const APP_SHELL = [
   "./",
   "./index.html",
