@@ -1005,3 +1005,111 @@ svg.lucide {
 .cloud-panel button{background:#b98283;color:white;border:0;border-radius:12px;padding:10px 15px;cursor:pointer;font:inherit}
 .cloud-panel button.secondary{background:#e9ddda;color:#675d5b;margin-left:8px}
 .cloud-panel .sync-state{font-size:12px;color:#796c69}
+
+/* V1.7.3 — compact, legible travel cards on phones (no cover image required). */
+.shelf-page .trip-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+  padding:8px 0 24px;
+  background:none;
+  align-items:stretch;
+}
+.shelf-page .trip-card.trip-card-simple,
+.shelf-page .trip-card.trip-card-simple:nth-child(even),
+.shelf-page .trip-card.trip-card-simple:nth-child(3n),
+.shelf-page .trip-card.trip-card-simple:nth-child(4n) {
+  position:relative;
+  transform:none;
+  min-width:0;
+  min-height:188px;
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  padding:16px 12px 13px;
+  border-radius:17px;
+  border:1px solid rgba(120,96,91,.14);
+  box-shadow:0 3px 12px rgba(91,74,68,.07);
+  overflow:hidden;
+  cursor:pointer;
+  color:#5e514f;
+}
+.shelf-page .trip-card.trip-card-simple:hover {transform:translateY(-2px)}
+.shelf-page .trip-card.trip-card-simple::before,
+.shelf-page .trip-card.trip-card-simple::after {display:none}
+.shelf-page .trip-card-simple.tone-0 {background:#ead6d4}
+.shelf-page .trip-card-simple.tone-1 {background:#e7e0d8}
+.shelf-page .trip-card-simple.tone-2 {background:#dce4e8}
+.shelf-page .trip-card-simple.tone-3 {background:#e1e8dd}
+.shelf-page .trip-card-simple.tone-4 {background:#e8dfea}
+.shelf-page .trip-card-simple.tone-5 {background:#eee3d5}
+.trip-card-simple .trip-card-top {display:flex;justify-content:space-between;align-items:center;color:#84736e;font-size:11px;letter-spacing:.08em}
+.trip-card-simple .trip-card-mark {font-size:14px;opacity:.55}
+.trip-card-simple .trip-card-title {margin:13px 0 3px;font-size:clamp(16px,4.3vw,21px);font-weight:600;line-height:1.3;letter-spacing:.03em;overflow-wrap:anywhere;color:#594e4d}
+.trip-card-simple .trip-card-subtitle {font-size:11px;line-height:1.45;color:#857571;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.trip-card-simple .trip-card-details {margin-top:auto;padding-top:12px;display:flex;flex-direction:column;gap:3px;border-top:1px solid rgba(111,89,85,.14);font-size:12px;line-height:1.4;color:#6e605d;overflow-wrap:anywhere}
+.trip-card-simple .trip-card-total {margin-top:4px;font-weight:700;font-size:15px;letter-spacing:.01em;color:#92676a;overflow-wrap:anywhere}
+@media (min-width:660px) {
+ .shelf-page .trip-grid {grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+ .shelf-page .trip-card.trip-card-simple {min-height:215px;padding:20px}
+ .trip-card-simple .trip-card-title {font-size:22px}
+}
+@media (max-width:350px) {
+ .shelf-page .trip-grid {gap:9px}
+ .shelf-page .trip-card.trip-card-simple {padding:12px 9px;min-height:190px}
+ .trip-card-simple .trip-card-title {font-size:15px}
+ .trip-card-simple .trip-card-total {font-size:13px}
+}
+
+
+/* V1.7.3 journal-card refinement — based on the supplied mobile reference. */
+.shelf-page .trip-card.trip-card-journal,
+.shelf-page .trip-card.trip-card-journal:nth-child(even),
+.shelf-page .trip-card.trip-card-journal:nth-child(3n),
+.shelf-page .trip-card.trip-card-journal:nth-child(4n) {
+  min-height:250px;
+  padding:21px 16px 17px;
+  border:1px solid rgba(157,116,113,.12);
+  border-radius:20px;
+  box-shadow:0 8px 20px rgba(112,83,80,.09), inset 0 1px rgba(255,255,255,.35);
+  background:linear-gradient(145deg,#f5e5e1 0%,#ead0cb 52%,#f6e9e6 100%);
+  color:#604c4b;
+  overflow:hidden;
+}
+.shelf-page .trip-card.trip-card-journal.tone-1 {background:linear-gradient(145deg,#f1eae4,#ddd3cb 54%,#f5eee9)}
+.shelf-page .trip-card.trip-card-journal.tone-2 {background:linear-gradient(145deg,#e9edf0,#cbdce1 54%,#edf3f4)}
+.shelf-page .trip-card.trip-card-journal.tone-3 {background:linear-gradient(145deg,#edf0e9,#d7dfd4 54%,#f1f4ee)}
+.shelf-page .trip-card.trip-card-journal.tone-4 {background:linear-gradient(145deg,#f0e9f0,#e2d2e2 54%,#f5eef4)}
+.shelf-page .trip-card.trip-card-journal.tone-5 {background:linear-gradient(145deg,#f5ede2,#e6d8c5 54%,#f7f1e8)}
+.shelf-page .trip-card.trip-card-journal::before,
+.shelf-page .trip-card.trip-card-journal::after {display:none}
+.trip-card-journal .journal-ribbon {
+  position:absolute;right:16px;top:0;width:24px;height:43px;
+  background:#c49a98;opacity:.88;
+  clip-path:polygon(0 0,100% 0,100% 100%,50% 77%,0 100%);
+}
+.trip-card-journal .trip-card-top {justify-content:flex-start;gap:9px;font-size:13px;letter-spacing:.05em;color:#75615e}
+.trip-card-journal .trip-card-mark {font-size:13px;opacity:.8;color:#a47a77}
+.trip-card-journal .journal-heading {display:flex;align-items:center;gap:5px;margin-top:15px;min-width:0}
+.trip-card-journal .trip-card-title {font-size:clamp(18px,5.1vw,25px);font-weight:700;line-height:1.3;margin:0;min-width:0;flex:1;letter-spacing:.02em;overflow-wrap:anywhere;color:#5c4947}
+.trip-card-journal .journal-plane {flex:0 0 auto;color:#ad7c7b;transform:rotate(-14deg);margin-right:1px}
+.trip-card-journal .trip-card-subtitle {margin-top:5px;font-size:10px;max-width:100%;color:#8a706c}
+.trip-card-journal .trip-card-details {margin-top:auto;padding-top:15px;border-top:1px solid rgba(144,101,99,.27);gap:9px;color:#665653;font-size:13px;line-height:1.3}
+.trip-card-journal .journal-detail {display:flex;align-items:center;gap:10px;min-width:0;margin:0;overflow-wrap:anywhere}
+.trip-card-journal .journal-detail svg {flex:0 0 19px;width:19px;height:19px;color:#a57876;stroke-width:1.8}
+.trip-card-journal .journal-detail span {min-width:0;overflow-wrap:anywhere}
+.trip-card-journal .trip-card-total {font-size:clamp(16px,4.3vw,21px);font-weight:700;color:#9c6869;letter-spacing:0}
+@media(max-width:380px) {
+ .shelf-page .trip-grid {gap:10px}
+ .shelf-page .trip-card.trip-card-journal {padding:18px 11px 15px;min-height:245px}
+ .trip-card-journal .trip-card-title {font-size:17px}
+ .trip-card-journal .journal-plane svg {width:18px;height:18px}
+ .trip-card-journal .trip-card-details {font-size:11px;gap:9px}
+ .trip-card-journal .journal-detail {gap:6px}
+ .trip-card-journal .journal-detail svg {width:16px;height:16px;flex-basis:16px}
+ .trip-card-journal .trip-card-total {font-size:15px}
+}
+@media(min-width:660px) {
+ .shelf-page .trip-card.trip-card-journal {min-height:275px;padding:25px 22px 20px}
+ .trip-card-journal .trip-card-title {font-size:25px}
+}
